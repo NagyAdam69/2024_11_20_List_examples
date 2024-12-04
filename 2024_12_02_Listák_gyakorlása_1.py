@@ -14,42 +14,27 @@ Minden feladat előtt a program írja ki a feladat sorszámát!
 10. Igaz-e, hogy a sorozat szigorúan monoton növekvő?
 11. Válogassuk ki két listába a páros és a páratlan számokat!
 """
+# alap
 import random
 szamok = [random.randint(-60, 100) for i in range(50)]
-
-def alap():
-    
-    darab = 0
-
-    while True:
-        darab += 1
-        szam = random.randint(-60, 100)
-        szamok.append(szam)
-        if darab == 50:
-            break
-    print(szamok)
+print(szamok)
 
 def elso():
-    darab = 0
     szorzat = 1
 
-    while True:
-        darab += 1
-        szam = random.randint(-60, 100)
-        szamok.append(szam)
+    for szam in szamok:
         szorzat *= szam
-        if darab == 50:
-            break
 
     print(f"1. feladat: {szorzat}")
+elso()
 
 def masodik():
     utolso_index = None
-    for i in range(len(szamok)-1, -1, -1):
+    for i in range(len(szamok)):
         if szamok[i] % 5 == 0 or szamok[i] % 7 == 0:
             utolso_index = i
-            break
     print(f"2. feladat: {utolso_index}")
+masodik()
 
 def harmadik():
     elso_index = None
@@ -58,6 +43,7 @@ def harmadik():
             elso_index = i
             break
     print(f"3. feladat: {elso_index}")
+harmadik()
 
 def negyedik():
     minden_negativ = all(szam < 0 for szam in szamok)
@@ -68,12 +54,13 @@ def negyedik():
         print("4. feladat: Nem mindegyik negatív.")
 
 def otodik():
-    van_egy_es_tiz_kozott = all(0 < szam < 10 for szam in szamok)
+    van_egy_es_tiz_kozott = all(not 0 < szam < 10 for szam in szamok)
 
     if van_egy_es_tiz_kozott:
-        print("5. feladat: Van olyan szám, ami egy és tíz közé esik.")
-    else:
         print("5. feladat: Nincs olyan szám, ami egy és tíz közé esik.")
+    else:
+        print("5. feladat: Van olyan szám, ami egy és tíz közé esik.")
+otodik()
 
 def hatodik():
     osthato_18 = sum(1 for szam in szamok if szam % 18 == 0)
@@ -86,7 +73,17 @@ def hetedik():
 def nyolcadik():
     for szam in szamok:
         if szam % 17 == 0 or szam % 18 == 0:
-            print("8. feladat:" end=' ')
+            print("8. feladat: ", end=' ')
             print(szam**2, end=" ")
-nyolcadik()
+
+def kilencedik():
+    van_ilyen_szam = False
+    for szam in range(len(szamok)):
+        if szamok[szam] != 50 or szamok[szam] != 0:
+            if szamok[szam] < 0 and szamok[szam - 1] > 0 and szamok[szam + 1] > 0:
+                print("Van ilyen szám.")
+            else:
+                print("Nincs ilyen szám.")
+    print(szamok)
+
 
